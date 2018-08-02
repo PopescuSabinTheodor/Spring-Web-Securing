@@ -1,0 +1,56 @@
+google:
+
+        client:
+
+            clientId: 1078785857458-8qejp8pqr96ib39b13p3lqb7p6mokt3q.apps.googleusercontent.com
+
+            clientSecret: IAyt9gHujkax-FRtVpJJ5nPL
+
+            accessTokenUri: https://www.googleapis.com/oauth2/v3/token
+
+            userAuthorizationUri: https://accounts.google.com/o/oauth2/auth
+
+            tokenName: oauth_token
+
+            authenticationScheme: query
+
+            clientAuthenticationScheme: form
+
+            scope: profile, email
+
+        resource:
+
+            userInfoUri: https://www.googleapis.com/userinfo/v2/me
+
+            preferTokenInfo: false
+            
+logging:
+     level:
+        org.springframework.security: DEBUG
+        
+
+        
+facebook:
+  client:
+    clientId: 647395435617713
+    clientSecret: a4a522c1f06a70b743522630ce2a5728
+    accessTokenUri: https://graph.facebook.com/oauth/access_token
+    userAuthorizationUri: https://www.facebook.com/dialog/oauth
+    tokenName: oauth_token
+    authenticationScheme: query
+    clientAuthenticationScheme: form
+    scope: user_likes, email
+  resource:
+    userInfoUri: https://graph.facebook.com/me
+    
+    
+github:
+  client:
+    clientId: 2a15077ddd4a730caefa
+    clientSecret: 5266bcd725e1d0a68da93554a5dcf565904dfa9a
+    accessTokenUri: https://github.com/login/oauth/access_token
+    userAuthorizationUri: https://github.com/login/oauth/authorize
+    clientAuthenticationScheme: form
+    scope: user:email
+  resource:
+    userInfoUri: https://api.github.com/user   

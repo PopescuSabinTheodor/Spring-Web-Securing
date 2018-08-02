@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Hello World!</title>
+    </head>
+    <body>
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>-->
+    <script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
+    <script type="text/javascript">
+    var logout;
+    /* $(document).ready(function () { */
+    	$.ajaxSetup({
+          beforeSend : function(xhr, settings) {
+            if (settings.type == 'POST' || settings.type == 'PUT'
+                || settings.type == 'DELETE') {
+              if (!(/^http:.*/.test(settings.url) || /^https:.*/
+                  .test(settings.url))) {
+                // Only send the token to relative URLs i.e. locally.
+                xhr.setRequestHeader("X-XSRF-TOKEN",
+                    Cookies.get('XSRF-TOKEN'));
+              }
+            }
+          }
+        });
+    	
+    	$.get("/user", function(data) {
+    		$("#user").html(data.userAuthentication.details.name);
+    		$("#email").html(data.userAuthentication.details.email);
+    		$("#gitUser").html(data.userAuthentication.details.login);
+	        $(".unauthenticated").hide()
+	        $(".authenticated").show()
+	        
+    	});
+    	
+    	
+    	
+    	logout = function() {
+	            $.post("/logout", function() {
+	                $("#user").html('');
+	                $("#gitUser").html('');
+	                $(".unauthenticated").show();
+	                $(".authenticated").hide();
+	            })
+	            return true;
+	        } 
+    	
+
+    	
+    /* }); */
+	</script>
+	
+        
+     
+        
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+        <div class="container authenticated">
+    		Logged in as: <span id="user"></span>
+    		 			  <span id="gitUser"></span>
+    		Email: <span id="email"></span>
+    		<div>
+    			<button onClick="logout()">Logout</button>
+  			</div>
+		</div>
+    </body>
+</html>
